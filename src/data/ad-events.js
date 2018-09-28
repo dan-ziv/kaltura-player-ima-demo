@@ -17,8 +17,7 @@ const adEvents = {
   AD_THIRD_QUARTILE: 'adthirdquartile',
   USER_CLOSED_AD: 'userclosedad',
   AD_VOLUME_CHANGED: 'advolumechanged',
-  AD_MUTED: 'admuted',
-  AD_PROGRESS: 'adprogress'
+  AD_MUTED: 'admuted'
 };
 
 export {adEvents};

@@ -4,24 +4,28 @@
       <el-header height="150px">
         <TopBar></TopBar>
       </el-header>
-      <el-container>
-        <el-aside width="30%" ></el-aside>
-        <el-main>
+      <el-main>
+        <el-col :span="7">
+          <div class="grid-content"></div>
+        </el-col>
+        <el-col :span="10">
           <hr>
           <h3>Configuration</h3>
-          <AdsConfiguration></AdsConfiguration>
+          <AdsConfiguration :player="player" :mediaInfo="mediaInfo"></AdsConfiguration>
           <hr>
           <h3>Player</h3>
-          <PlayerPlaceholder></PlayerPlaceholder>
+          <PlayerPlaceholder :targetId="targetId"></PlayerPlaceholder>
           <hr>
           <h3>Events</h3>
-          <EventConsole></EventConsole>
+          <EventConsole :player="player"></EventConsole>
           <hr>
           <h3>Companions</h3>
           <Companions></Companions>
-        </el-main>
-        <el-aside width="30%"></el-aside>
-      </el-container>
+        </el-col>
+        <el-col :span="7">
+          <div class="grid-content"></div>
+        </el-col>
+      </el-main>
     </el-container>
   </div>
 </template>
@@ -30,15 +34,18 @@
 import PlayerPlaceholder from './components/PlayerPlaceholder';
 import TopBar from './components/TopBar';
 import AdsConfiguration from './components/AdsConfiguration';
-import {storeSetEntryId} from './store/mutations-helpers';
 import {entries} from './data/entries';
 import EventConsole from './components/EventConsole';
 import Companions from './components/Companions';
+import {playerConfig} from './data/player-config';
 
 export default {
   name: 'App',
-  beforeCreate() {
-    storeSetEntryId(entries[0].value);
+  created() {
+    this.targetId = playerConfig.targetId;
+    this.mediaInfo = {entryId: entries[0].value};
+    this.player = __kalturaplayer = KalturaPlayer.setup(playerConfig);
+    this.player.loadMedia(this.mediaInfo);
   },
   components: {
     EventConsole,

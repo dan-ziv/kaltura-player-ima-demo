@@ -4,12 +4,12 @@
       <h1>{{title}}</h1>
       <h4>{{description}}</h4>
       <el-row class="version">
-        <el-tag v-if="player">
+        <el-tag>
           <a v-bind:href="playerRepoUrl" target="_blank">
             Kaltura Player v{{playerVersion}}
           </a>
         </el-tag>
-        <el-tag v-if="player">
+        <el-tag>
           <a v-bind:href="imaRepoUrl" target="_blank">
             PlayKit IMA v{{imaVersion}}
           </a>
@@ -20,8 +20,6 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
-
 export default {
   computed: {
     playerVersion() {
@@ -29,8 +27,7 @@ export default {
     },
     imaVersion() {
       return KalturaPlayer.plugins.ima.VERSION;
-    },
-    ...mapState(['player'])
+    }
   },
   data() {
     return {

@@ -32,8 +32,14 @@
     </el-row>
     <el-row class="padding">
       <el-switch
-        v-model="config.plugins.ima.adsRenderingSettings.enablePreloading"
-        active-text="Preload ads">
+        v-model="config.playback.autoplay"
+        active-text="Autoplay">
+      </el-switch>
+    </el-row>
+    <el-row class="padding">
+      <el-switch
+      v-model="config.plugins.ima.adsRenderingSettings.enablePreloading"
+      active-text="Preload ads">
       </el-switch>
     </el-row>
     <el-row class="padding">
@@ -47,22 +53,19 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
 import {playerConfig} from '../data/player-config';
 
 export default {
-  computed: {
-    ...mapGetters(['player', 'entryId'])
-  },
+  props: ['player', 'mediaInfo'],
   methods: {
-    onTestAdClick() {
+    onTestAdClick: function() {
       if (this.adInputType === 'url') {
         delete this.config.plugins.ima.adsResponse;
       } else {
         delete this.config.plugins.ima.adTagUrl;
       }
       this.player.configure(this.config);
-      this.player.loadMedia({entryId: this.entryId});
+      this.player.loadMedia(this.mediaInfo);
     },
     onSampleClick() {
       this.config.plugins.ima.adTagUrl = this.sampleAdTagUrl;

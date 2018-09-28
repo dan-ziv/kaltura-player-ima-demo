@@ -45,12 +45,11 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
 import {adEvents} from '../data/ad-events';
 
 export default {
+  props: ['player'],
   computed: {
-    ...mapGetters(['player']),
     filteredEvents() {
       return this.events.filter(event => {
         return event.type.indexOf(this.filter.toLowerCase()) > -1;

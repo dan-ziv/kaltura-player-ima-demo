@@ -5,28 +5,21 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
-import {playerConfig} from '../data/player-config';
-import {storeSetPlayer} from '../store/mutations-helpers';
-
 export default {
-  computed: {
-    ...mapGetters(['player', 'entryId'])
-  },
+  props: ['targetId'],
   mounted() {
-    const player = KalturaPlayer.setup(playerConfig);
     const playerPlaceholder = document.getElementById('player-placeholder');
-    addStyles(playerPlaceholder);
-    storeSetPlayer(player);
-    player.loadMedia({entryId: this.entryId});
+    const playerContainer = document.getElementById(this.targetId);
+    addStyles(playerContainer);
+    playerPlaceholder.appendChild(playerContainer);
   }
 };
 
-function addStyles(playerPlaceholder) {
-  playerPlaceholder.style.margin = '10px 10px 10px 10px';
-  playerPlaceholder.style.backgroundColor = 'white';
-  playerPlaceholder.style.height = '360px';
-  playerPlaceholder.style.width = '640px';
-  playerPlaceholder.style.boxShadow = '2px 2px 8px 0px #88888885';
+function addStyles(playerContainer) {
+  playerContainer.style.margin = '10px 10px 10px 10px';
+  playerContainer.style.backgroundColor = 'white';
+  playerContainer.style.height = '360px';
+  playerContainer.style.width = '640px';
+  playerContainer.style.boxShadow = '2px 2px 8px 0px #88888885';
 }
 </script>

@@ -1,6 +1,7 @@
 const playerConfig = {
-  targetId: 'player-placeholder',
+  targetId: 'player-container',
   logLevel: 'DEBUG',
+  disableUserCache: true,
   provider: {
     partnerId: 1091,
     env: {

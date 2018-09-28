@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import App from './App';
 import Element from 'element-ui';
-import store from './store/index';
 import WebFont from 'webfontloader';
+import {playerConfig} from './data/player-config';
 
 Vue.use(Element);
 Vue.config.productionTip = false;
@@ -13,9 +13,12 @@ WebFont.load({
   }
 });
 
+const playerContainer = document.createElement('div');
+playerContainer.id = playerConfig.targetId;
+document.body.appendChild(playerContainer);
+
 new Vue({
   el: '#app',
-  store,
   components: {App},
   template: '<App/>'
 });
