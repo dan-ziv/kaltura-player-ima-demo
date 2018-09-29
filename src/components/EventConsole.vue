@@ -51,18 +51,17 @@ export default {
   props: ['player'],
   computed: {
     filteredEvents() {
-      return this.events.filter(event => {
-        return event.type.indexOf(this.filter.toLowerCase()) > -1;
-      });
+      return this.events.filter(event => event.type.indexOf(this.filter.toLowerCase()) > -1);
     }
   },
   mounted() {
     Object.values(adEvents).forEach(event => {
       this.player.addEventListener(event, e => {
+        const eventEnum = Object.keys(adEvents).find(k => adEvents[k] === event);
         this.events.push({
           index: this.index++,
           time: new Date().toLocaleTimeString(),
-          type: e.type,
+          type: eventEnum,
           payload: e.payload
         });
       });
